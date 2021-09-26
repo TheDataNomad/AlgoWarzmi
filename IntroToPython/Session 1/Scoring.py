@@ -1,14 +1,14 @@
-def VariableExist(variables):
+def VariableExist(variables,global_variables):
     errors = 0
     x= variables.split(',')
     for var in x:
         try: 
-            globals()[var]
+            global_variables[var]
         except NameError: 
-            print(f"NameError: {var} doens't exist")
+            print(f"NameError: {var} doesn't exist")
             errors += 1
         except KeyError: 
-            print(f"NameError: {var} doens't exist")
+            print(f"NameError: {var} doesn't exist")
             errors += 1
     if errors == 0:
         if len(x) == 1:
@@ -16,15 +16,15 @@ def VariableExist(variables):
         else:
             print(f"Great Work! {x} are declared correctly")
         
-    return errors   
+    return errors 
 
-def AllIntegers(variables):
-    errors1 = VariableExist(variables)   
+def AllIntegers(variables,global_variables):
+    errors1 = VariableExist(variables,global_variables) 
     x= variables.split(',')
     errors2= 0
     for var in x:
         try: 
-            assert(isinstance(globals()[var],int))
+            assert(isinstance(global_variables[var],int))
         except: 
             print(f"Error: {var} is not an integer")
             errors2 += 1
@@ -32,15 +32,15 @@ def AllIntegers(variables):
         print(f"Great Work! {x} is an integer")
 
     
-    return errors1 + errors2 
+    return errors1 + errors2
 
-def AllStrings(variables):
-    errors1 = VariableExist(variables)   
+def AllStrings(variables,global_variables):
+    errors1 = VariableExist(variables,global_variables) 
     x= variables.split(',')
     errors2= 0
     for var in x:
         try: 
-            assert(isinstance(globals()[var],str))
+            assert(isinstance(global_variables[var],str))
         except: 
             print(f"Error: {var} is not a string")
             errors2 += 1
@@ -51,10 +51,12 @@ def AllStrings(variables):
     return errors1 +errors2 
 
 def TaskTwo(value,num,remainder):
-    value = 456723
     errors = 0
     if num == 2 and remainder == 1:
-        print(f"Your answer is correct and {value} is odd")
+        if value %2 == 1:
+            print(f"Your answer is correct and {value} is odd")
+        else:
+            print(f"Your answer is correct and {value} is even")
     elif num != 2 and remainder ==1:
         print("Error: num value is wrong")
         errors = 1
@@ -62,7 +64,7 @@ def TaskTwo(value,num,remainder):
         print("Error: remainder value is wrong")
         errors = 1
     else:
-        "Error: Borth remainder and num values are wrong"
+        "Error: Both remainder and num values are wrong"
         errors = 2
         
     
@@ -105,12 +107,18 @@ def TaskThree(animalsListLength,StudentAgesLength,AgeEqual20,sortedStudentAges,O
         
     return errors
 
-def TaskFour(Python10):
-    errors = AllIntegers("PythonLoc") + AllStrings("Python10")
+def TaskFour(Python10,global_variables):
+    errors = AllIntegers("PythonLoc",global_variables) + AllStrings("Python10",global_variables)
+    if global_variables['PythonLoc'] == 80:
+        print("Great Work! You found the correct start location of the word")
+        error =0
+    else:
+        print("Error! You found the wrong start location of the word")
+        error =1
     if Python10 == ("Python "*10):
         print("Great Work! Python10 is printing the correct string")
     else:
         errors +=1
         print("Error: Python10 is not printing the correct string")
         
-    return errors
+    return errors + error
