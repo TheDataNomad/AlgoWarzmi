@@ -1,0 +1,1 @@
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TheDataNomad/AlgoWarzmi/blob/main/IntroToPython/Session%204/Session%20#%204%20Code.ipynb)
